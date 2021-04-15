@@ -8,16 +8,10 @@ target 'PriceApp' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 
-  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
-  pod 'RealmJS', :path => '../node_modules/realm'
 
-  pod 'RNCPicker', :path => '../node_modules/@react-native-community/picker'
-
-  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   target 'PriceAppTests' do
     inherit! :complete

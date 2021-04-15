@@ -5,6 +5,7 @@ import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.reactnativecommunity.picker.RNCPickerPackage;
+import com.reactnativecommunity.picker.RNCPickerPackage;
 import io.realm.react.RealmReactPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
