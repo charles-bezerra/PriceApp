@@ -1,5 +1,4 @@
-import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     inputWrapper: {
@@ -27,15 +26,4 @@ const styles = StyleSheet.create({
         marginBottom: 4,    }
 });
 
-
-export default ({style, label, ...props}) => (
-    <View style={styles.inputWrapper}>
-        {label ? <Text style={styles.label}>{label}</Text> : <></> }
-
-        <TextInput
-            editable={props.editable ? true : false}
-            style={[styles.input, style ? style : {}, (props.editable) ? {} : styles.inputDisabled]}
-            {...props}
-        />
-    </View>
-);
+export default styles;

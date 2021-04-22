@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import Row from '../../components/Row';
+import Row from '../Row';
 import styles from "../../assets/styles"
 
 export default ({children, style}) => (

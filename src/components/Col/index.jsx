@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     }
 });
 
-
 export default ({children, width, style}) => (
     <View style={[styles.col, style ? style : {}, width ? {width: width} : {}]}>
         {children}

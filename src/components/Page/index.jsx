@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 const Root = ({ children }) => (
-    <LinearGradient colors={["#FB6620", "#EA550F"]} style={styles.linear}>
+    <LinearGradient colors={["#FB6620", "#fc7537"]} style={styles.linear}>
         {children}
     </LinearGradient>
 )
@@ -32,7 +32,7 @@ export default ({children}) => {
                 <StatusBar
                     animated={true}
                     barStyle="light-content"
-                    backgroundColor="#FB6620"
+                    backgroundColor="#f28b5c"
                     />
                 
                 {children}

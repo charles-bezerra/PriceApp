@@ -1,14 +1,17 @@
 import React from 'react';
 
+//components
 import ButtonBack from '../../components/ButtonBack';
 import Page from '../../components/Page';
 import Navbar from '../../components/Navbar';
 import FormProduct from '../../components/FormProduct';
+import BlackArea from '../../components/BlackArea';
+import Button from '../../components/Button';
 
 //hooks
 import useApp from '../../hooks/useApp';
-import BlackArea from '../../components/BlackArea';
-import Button from '../../components/Button';
+
+//reducers
 import productReducer from '../../reducers/productReducer';
 
 

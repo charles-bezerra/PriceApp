@@ -11,50 +11,44 @@ import CounterArea from '../../components/CounterArea';
 import Row from '../../components/Row';
 import Col from '../../components/Col';
 import ModePrintArea from '../../components/ModePrintArea';
-import ContentLoading from '../../components/ContentLoading';
 import Navbar from '../../components/Navbar';
 
 //Hooks
 import {useNavigation} from '@react-navigation/native';
 import useApp from '../../hooks/useApp';
 
-//Reducers
+//Controller
+import { listProduct } from '../../controllers/product.controller';
 
-const ContentListCardProduct = ({products}) => (
-  <FlatList
-    data={products}
-    renderItem={({item}) => <Card product={item} />}
-    keyExtractor={(_, index) => `list-product-${index}`}
-  />
-);
+const ContentListCardProduct = ({products}) => {
+  let content = (<Text>Nenhum produto cadastrado.</Text>);
+  
+  if (products.length > 0) {
+    content = (
+      <FlatList
+        data={products} 
+        renderItem={({item}) => <Card product={item} /> }
+        keyExtractor={(_, index) => `list-product-${index}`}
+      />  
+    ) 
+  }
+
+  return content;
+};
 
 export default () => {
   const navigation = useNavigation();
   const {products, productsDispatch} = useApp();
-  const [content, setContent] = React.useState(<ContentLoading />);
-
-  const getProducts = React.useCallback( () => {
-    const onResponse = (response) => productsDispatch({ type: 'SET', payload: { products: response } });
-    const payload = { minIndex: 0, maxIndex: 9, onResponse };
-
-    productsDispatch({ type: 'LIST', payload });
-  }, [productsDispatch])
-
-  React.useEffect( () => {
-    getProducts();
-  }, [getProducts]);
-
 
   React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (products.length > 0) {
-        setContent(<ContentListCardProduct products={products} />);
-      } else {
-        setContent(<Text>Nenhum produto cadastrado.</Text>);
-      }
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, [products]);
+    listProduct(0, 9)
+      .then( (productsResponse) => {
+        productsDispatch({
+          type: 'SET', 
+          payload: {products: [...productsResponse] }
+        });
+      });
+  }, [productsDispatch, listProduct]);
 
   return (
     <Page>
@@ -62,16 +56,16 @@ export default () => {
 
         <Row style={{justifyContent: 'space-between'}}>
             <Col width="50%" style={{paddingEnd: 4}}>
-            <CounterArea title="Total de produtos" counter={products.length} />
+              <CounterArea title="Total de produtos" />
             </Col>
 
             <Col width="50%" style={{paddingLeft: 4}}>
-            <ModePrintArea i={1} j={24} />
+              <ModePrintArea i={1} j={24} />
             </Col>
         </Row>
 
         <BlackArea title="Últimos produtos adicionados" style={{flex: 1}}>
-            {content}
+          <ContentListCardProduct products={products} />
         </BlackArea>
 
       <SliderArea>

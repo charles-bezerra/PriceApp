@@ -1,33 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, Text } from 'react-native';
+
+//Components
 import BlackArea from '../BlackArea';
 import Col from '../Col';
 import Row from '../Row';
 
-const styles = StyleSheet.create({
-    contentXY: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignContent: "center",
-        backgroundColor: "#F1F0F0",
-        borderRadius: 6,
-        paddingTop: 8,
-        paddingBottom: 16
-    },
-    contentVS: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignContent: "center",
-        borderRadius: 6,
-        paddingTop: 8,
-        paddingBottom: 16
-    },
-    text: {
-        fontSize: 20
-    }
-});
+//StyleSheets
+import styles from "./styles";
 
 export default ({ i, j }) => {
     return ( 

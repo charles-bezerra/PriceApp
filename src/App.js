@@ -13,10 +13,12 @@ import { AppProvider } from './contexts';
 
 import './config/ReactotronConfig';
 
-const App = () => (
-    <AppProvider>
-        <Routes/>
-    </AppProvider>
-);
+const App = () => {
+    return (
+        <AppProvider>
+            <Routes/>
+        </AppProvider>
+    );
+}
 
 export default App;

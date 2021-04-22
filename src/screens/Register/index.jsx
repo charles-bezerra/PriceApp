@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, ScrollView, Alert } from 'react-native';
 
 //components
 import BlackArea from '../../components/BlackArea';
@@ -11,10 +12,9 @@ import FormProduct from '../../components/FormProduct';
 //hooks
 import useApp from '../../hooks/useApp';
 
-//consts
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-
+//controllers
+import { saveProduct } from '../../controllers/product.controller';
+ 
 export default () => {
     const { 
         product, 
@@ -29,7 +29,21 @@ export default () => {
     }
 
     const save = () => {
-        productDispatch({ type: 'SAVE', payload: { onInit: addLoader, onFinally: finallySave } });
+        addLoader();
+
+        saveProduct(product)
+           .then((response) => {
+                if (response) {
+                    Alert.alert("Produto salvo com sucesso!");
+                }
+                else {
+                    Alert.alert("Código de barras já cadastrado.");
+                }
+            })
+            .catch( () => {
+                Alert.alert("Falha ao salvar produto");
+            })
+            .finally(finallySave);
     };
 
     React.useEffect(() => {
