@@ -3,7 +3,7 @@ import { FlatList, Text, View } from "react-native";
 import Card from "../Card";
 import Loading from "../Loading";
 
-const ListProducts = ({ products, onList }) => {
+const ListProducts = ({ products, onList, isLoading }) => {
     const [pagination, setPagination] = React.useState({
         minIndex: 0,
         maxIndex: 9,
@@ -28,9 +28,11 @@ const ListProducts = ({ products, onList }) => {
                 keyExtractor={(item, index) => `${item.barcode} - ${index}`}
                 renderItem={({ item }) => <Card product={item} />}
                 ListEmptyComponent={() => <Text>Nenhum produto encontrado.</Text>}
-                ListFooterComponent={() => (
-                    <View style={{ paddingVertical: 8 }}>{<Loading />}</View>
-                )}
+                ListFooterComponent={() => isLoading ? 
+                    (
+                        <View style={{ paddingVertical: 16 }}>{ <Loading />}</View>
+                    ) : <></>
+                }
             />
         </>
     );

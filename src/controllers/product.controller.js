@@ -1,69 +1,59 @@
-import getRealm from '../services/realm.service';
-import { verifyAllFieldsUtil } from '../util';
+import getRealm from "../services/realm.service";
 
-export async function listProduct(minIndex, maxIndex) {    
+
+export async function listProduct(minIndex, maxIndex) {
     const realm = await getRealm();
-  
+
     try {
         let nproducts = realm
-          .objects('Product')
-          .sorted('created_at')
-          .filter((_, index) => index >= minIndex && index <= maxIndex);
+            .objects("Product")
+            .sorted("title")
+            .filter((_, index) => index >= minIndex && index <= maxIndex);
 
-        const newproducts = nproducts.map( (product) => { 
-            const productStringfy = JSON.stringify(product); 
+        const newproducts = nproducts.map((product) => {
+            const productStringfy = JSON.stringify(product);
             return JSON.parse(productStringfy);
         });
 
         return newproducts;
+    } catch (error) {
+        console.log("Falied on listed the products: ", error);
     }
-    catch (error) {
-        console.log('Falied on listed the products: ', error);
-    }
-    
 }
+
 
 export async function saveProduct(product) {
     const realm = await getRealm();
 
     try {
         const newDate = new Date();
-    
         product.created_at = newDate.toDateString();
         product.updated_at = newDate.toDateString();
-    
-        if (verifyAllFieldsUtil(product)) {
-    
-            const results = realm
-                .objects('Product')
-                .filter((p) => p.barcode === product.barcode);
-    
-            if (results.length === 0) {
-                realm.write(() => {
-                    const newProduct = realm.create('Product', product);
-                    return newProduct;  
-                });
 
-                return true;
-            }
-            else {
-                return false;
-            }
+        const result = realm.objectForPrimaryKey("Product", product.barcode);
+
+        if (!result) {
+            realm.write(() => {
+                const newProduct = realm.create("Product", product);
+                return newProduct;
+            });
+            return true;
+        } else {
+            return false;
         }
+    } catch (error) {
+        console.log(error);
     }
-    catch (error) {
-        console.log();
-    } 
-
 }
+
 
 export async function counterProduct() {
     const realm = await getRealm();
-    return realm.objects('Product').length;
+    return realm.objects("Product").length;
 }
-  
 
-export async function deleteProduct(product) {    
+
+export async function deleteProduct(product) {
     const realm = await getRealm();
     const productObjectRealm = realm.objectForPrimaryKey("Product", product.barcode);
 
@@ -74,19 +64,24 @@ export async function deleteProduct(product) {
     }
 }
 
-export async function updateProduct(product) {
+
+export async function updateProduct(newProduct) {
     const realm = await getRealm();
 
-    let newProduct = product;
- 
-    realm.write(() => {
-        newProduct = realm.create('Product', product);
+    try {
+        realm.write(() => {
+            const product = realm.objectForPrimaryKey("Product", newProduct.barcode);
 
-        Object
-            .keys(key => {
-                newProduct[key] = product[key];
+            Object.keys(newProduct).forEach((key) => {
+                if (key !== "barcode" && product[key] !== newProduct[key]) {
+                    product[key] = newProduct[key];
+                }
             });
-    });
+        });
 
-    return newProduct;
+        return true;
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
 }

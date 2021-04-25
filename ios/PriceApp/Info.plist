@@ -4,6 +4,16 @@
 <dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Permitir a utilização da câmera pelo PreçoImpresso</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Permitir acesso as imagens da galeria</string>
+
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Deixar o app salvar fotos em sua galeria</string>
+
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Permitir acesso ao seu microfone</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

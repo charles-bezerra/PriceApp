@@ -14,18 +14,24 @@ import useApp from '../../hooks/useApp';
 
 //controllers
 import { saveProduct } from '../../controllers/product.controller';
+import { verifyAllFieldsUtil } from '../../util';
  
 export default () => {
     const { 
         product, 
         productDispatch, 
+        
         addLoader, 
         removeLoader 
     } = useApp();
 
-    const finallySave = () => {
-        setTimeout( () => removeLoader(), 2000);
-        productDispatch({ type: 'RESET' });
+    const onSave = () => {
+        if (verifyAllFieldsUtil(product, ["price", "description"])) {
+            save();
+        }
+        else {
+            Alert.alert("Preencha todos o campos obrigatórios");
+        }
     }
 
     const save = () => {
@@ -43,7 +49,10 @@ export default () => {
             .catch( () => {
                 Alert.alert("Falha ao salvar produto");
             })
-            .finally(finallySave);
+            .finally( () => {
+                setTimeout( () => removeLoader(), 2000);
+                productDispatch({ type: 'RESET' });
+            });
     };
 
     React.useEffect(() => {
@@ -62,7 +71,10 @@ export default () => {
                 </ScrollView>
 
                 <View style={{ paddingTop: 8 }}>
-                    <Button key={'button-0'} onPress={save} text="Salvar" />
+                    <Button 
+                        key={'button-0'} 
+                        onPress={save} 
+                        text="Salvar" />
                 </View>
             </BlackArea>
         </Page>
