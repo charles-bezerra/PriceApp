@@ -1,6 +1,5 @@
 import getRealm from "../services/realm.service";
 
-
 export async function listProduct(minIndex, maxIndex) {
     const realm = await getRealm();
 
