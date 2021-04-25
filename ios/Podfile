@@ -8,11 +8,6 @@ target 'PriceApp' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-
-
-
-
-
   target 'PriceAppTests' do
     inherit! :complete
     # Pods for testing
