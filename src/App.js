@@ -8,10 +8,7 @@
 
 import React from 'react';
 import Routes from './routes';
-
 import { AppProvider } from './contexts';
-
-import './config/ReactotronConfig';
 
 const App = () => {
     return (
