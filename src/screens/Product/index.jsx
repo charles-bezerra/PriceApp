@@ -60,8 +60,11 @@ export default () => {
   
   const {
     product,
+    productDispatch,
+
     products,
     productsDispatch,
+    
     addLoader,
     removeLoader,
   } = useApp();
@@ -88,6 +91,10 @@ export default () => {
         removeLoader();
       });
   };
+
+  React.useEffect( () => {
+    return () => productDispatch({type: "RESET"})
+  }, [productDispatch])
 
   return (
     <Page>
@@ -127,7 +134,7 @@ export default () => {
             iconName="delete"
             secondary
             onPress={onDelete}
-            text="Excluir projeto"
+            text="Excluir produto"
           />
         </BSpacing>
 

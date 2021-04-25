@@ -10,7 +10,7 @@ import styles from './styles';
 //Controller
 import { counterProduct } from '../../controllers/product.controller';
 
-export default ({ title }) => {
+export default ({ title, style }) => {
     const [counter, setCounter] = React.useState(0);
 
     React.useEffect( () => {
@@ -25,7 +25,7 @@ export default ({ title }) => {
     }, [setCounter, counterProduct]);
 
     return (
-        <BlackArea title={title}>
+        <BlackArea title={title} style={style ? style : {}}>
             <View style={[styles.counterAreaContent]}>
                 <Text style={styles.counterAreaNumber}>{counter}</Text>
             </View>       
