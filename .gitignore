@@ -35,7 +35,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 package-lock.json
-yarn.slock
+yarn.lock
 
 # BUCK
 buck-out/
