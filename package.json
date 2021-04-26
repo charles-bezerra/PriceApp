@@ -41,13 +41,6 @@
   "jest": {
     "preset": "react-native"
   },
-  "icon": "./assets/icon.png",
-  "orientation": "portrait",
-  "splash": {
-    "image": "./assets/splash.png",
-    "resizeMode": "contain",
-    "backgroundColor": "#ffffff"
-  },
   "ios": {
     "supportsTablet": true,
     "bundleIdentifier": "com.startupautomatic.impresso"
