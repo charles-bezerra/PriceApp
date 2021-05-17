@@ -17,6 +17,7 @@ import {deleteProduct} from '../../controllers/product.controller';
 
 //Utils
 import FormateDateUtil from '../../util/FormateDate';
+import { ProductActionTypes } from '../../store/types';
 
 const styles = StyleSheet.create({
   title: {
@@ -93,7 +94,7 @@ export default () => {
   };
 
   React.useEffect( () => {
-    return () => productDispatch({type: "RESET"})
+    return () => productDispatch({type: ProductActionTypes.RESET})
   }, [productDispatch])
 
   return (

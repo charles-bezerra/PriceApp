@@ -25,7 +25,7 @@ export const categories = [
     "Utilidades domésticas",
     "Vestuário",
     "Zero Lactose"
-]
+];
 
 export const initialProduct = {
     title: "",
@@ -35,4 +35,9 @@ export const initialProduct = {
     category: "",
     created_at: "",
     updated_at: "",
-}
+};
+
+export const initialPagination = {
+    minIndex: 0,
+    maxIndex: 9,
+};

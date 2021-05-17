@@ -81,10 +81,6 @@ export default () => {
             iconName="undo"
           />
           <ButtonOption
-            title="Adicionar logo"
-            iconName="upload"
-          />
-          <ButtonOption
             title="Ajuda"
             iconName="info-circle"
           />

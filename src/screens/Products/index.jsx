@@ -8,48 +8,25 @@ import Navbar from '../../components/Navbar';
 import Page from '../../components/Page';
 import ListProducts from '../../components/ListProducts';
 
-//hooks
-import useApp from '../../hooks/useApp';
-
-//controllers
-import { listProduct } from '../../controllers/product.controller';
+import useProductsPagination from "../../hooks/useProductsPagination";
 
 export default () => {
-  const {products, productsDispatch} = useApp();
   const [isLoading, setIsLoading] = React.useState(true);
+  const [products, onScroll] = useProductsPagination();
 
-
-  const onList = React.useCallback( (minIndex, maxIndex) => {
-    return new Promise( (resolve, reject) => {
-      listProduct(minIndex, maxIndex)
-        .then((response) => {
-          productsDispatch({
-            type: minIndex == 0 ? "RESET" : "ADD", 
-            payload: {products: response} 
-          });
-
-          resolve();
-        })
-        .catch( (error) => {
-          reject(error);
-        });
-    });
-  }, [listProduct, productsDispatch]);
-
-
-  React.useState(() => {
+  React.useEffect(() => {
+    let timeout;
     setIsLoading(true);
 
-    onList(0, 9)
-      .finally( () => {
-        setTimeout( () => {
-          setIsLoading(false);
-        }, 2000);  
-      });
-
-    return () => productsDispatch({type: 'RESET'})  
-  }, [productsDispatch, onList]);
-
+    onScroll()
+    .finally( () => {
+      timeout = setTimeout( () => {
+        setIsLoading(false);
+      }, 2000);  
+    });
+  
+    return () => clearTimeout(timeout)
+  }, []);
   
   return (
     <Page>
@@ -58,7 +35,7 @@ export default () => {
       <BlackArea title="Lista de produtos" style={{flex: 1}}>
         <ListProducts 
           products={products} 
-          onList={onList}
+          onList={onScroll}
           isLoading={isLoading} />
       </BlackArea>
     </Page>

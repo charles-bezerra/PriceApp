@@ -13,12 +13,12 @@ import Button from '../../components/Button';
 import useApp from '../../hooks/useApp';
 
 //reducers
-import productReducer from '../../reducers/productReducer';
+import productReducer from '../../store/reducers/productReducer';
 import { updateProduct } from '../../controllers/product.controller';
 
 
 export default () => {
-    const { product, addLoader, removeLoader, productDispatch } = useApp();
+    const { product, productDispatch, addLoader, removeLoader } = useApp();
     const [ productEdit, productDispatchEdit ] = React.useReducer(productReducer, product);
 
     const onUpdate = () => {
@@ -27,7 +27,7 @@ export default () => {
         updateProduct(productEdit)
             .then( (updated) => {
                 if (updated) {
-                    productDispatch({ type: 'SET', payload: {product:productEdit} })
+                    productDispatch({ type: 'SET', payload: { product: productEdit } })
                     Alert.alert("Produto atualizado com sucesso!");
                 }
                 else {

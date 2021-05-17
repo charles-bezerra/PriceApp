@@ -5,8 +5,8 @@ import ModalLoading from '../components/ModalLoading';
 import { initialProduct } from '../constants';
 
 //reducers
-import productReducer from '../reducers/productReducer';
-import productsReducer from '../reducers/productsReducer';
+import productReducer from '../store/reducers/productReducer';
+import productsReducer from '../store/reducers/productsReducer';
 
 //contexts
 export const AppContext = React.createContext({});
