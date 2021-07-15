@@ -1,8 +1,7 @@
-import getRealm from "../services/realm.service";
+import { getRealm } from "../services/realm.service";
 
 export async function listProduct(minIndex, maxIndex) {
     const realm = await getRealm();
-
     try {
         let nproducts = realm
             .objects("Product")
@@ -19,7 +18,6 @@ export async function listProduct(minIndex, maxIndex) {
         console.log("Falied on listed the products: ", error);
     }
 }
-
 
 export async function saveProduct(product) {
     const realm = await getRealm();
@@ -45,12 +43,10 @@ export async function saveProduct(product) {
     }
 }
 
-
 export async function counterProduct() {
     const realm = await getRealm();
     return realm.objects("Product").length;
 }
-
 
 export async function deleteProduct(product) {
     const realm = await getRealm();
@@ -62,7 +58,6 @@ export async function deleteProduct(product) {
         });
     }
 }
-
 
 export async function updateProduct(newProduct) {
     const realm = await getRealm();

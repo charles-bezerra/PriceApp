@@ -8,7 +8,6 @@ export default ({ children, style, title }) => {
             {
                 (title) ? <Text style={styles.title}>{title}</Text> : <></>
             }
-    
             {children}
         </View>
     )

@@ -12,19 +12,21 @@ import RegisterScreen from './screens/Register';
 import ScanScreen from "./screens/Scan";
 import ProductEditScreen from "./screens/ProductEdit";
 import SwitchScreen from "./screens/SwitchScreen";
+import UploadImageScreen from "./screens/UploadImage";
 
 const StackApp = createStackNavigator();
 
 export default () => (
-    <NavigationContainer>
-        <StackApp.Navigator>
-                <StackApp.Screen options={{headerShown: false}} name="HOME" component={HomeScreen}/> 
-                <StackApp.Screen options={{headerShown: false}} name="PRODUCT" component={ProductScreen}/> 
-                <StackApp.Screen options={{headerShown: false}} name="PRODUCTS" component={ProductsScreen}/> 
-                <StackApp.Screen options={{headerShown: false}} name="REGISTER" component={RegisterScreen}/>
-                <StackApp.Screen options={{headerShown: false}} name="CAM_SCAN" component={ScanScreen}/>
-                <StackApp.Screen options={{headerShown: false}} name="PRODUCT_EDIT" component={ProductEditScreen}/> 
-                <StackApp.Screen options={{headerShown: false}} name="SWITCH" component={SwitchScreen}/>
-        </StackApp.Navigator>
-    </NavigationContainer>
+  <NavigationContainer>
+    <StackApp.Navigator>
+      <StackApp.Screen options={{ headerShown: false }} name="HOME" component={HomeScreen} />
+      <StackApp.Screen options={{ headerShown: false }} name="PRODUCT" component={ProductScreen} />
+      <StackApp.Screen options={{ headerShown: false }} name="PRODUCTS" component={ProductsScreen} />
+      <StackApp.Screen options={{ headerShown: false }} name="REGISTER" component={RegisterScreen} />
+      <StackApp.Screen options={{ headerShown: false }} name="CAM_SCAN" component={ScanScreen} />
+      <StackApp.Screen options={{ headerShown: false }} name="PRODUCT_EDIT" component={ProductEditScreen} />
+      <StackApp.Screen options={{ headerShown: false }} name="SWITCH" component={SwitchScreen} />
+      <StackApp.Screen options={{ headerShown: false }} name="UPLOAD_IMAGE" component={UploadImageScreen} />
+    </StackApp.Navigator>
+  </NavigationContainer>
 )

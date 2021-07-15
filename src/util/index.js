@@ -1,11 +1,11 @@
 const inExcepts = (array, key) => {
-  let i = 0, 
-      founded = false;
-
+  let i = 0, founded = false;
+  
   while (i < array.length && !founded) {
     if (array[i] === key) {
       founded=true;
     }
+    i++;
   }
 
   return founded;
@@ -21,13 +21,12 @@ export const verifyAllFieldsUtil = (obj, excepts = []) => {
           result = false;
         }
       });
-
+      
     return result;
 } 
 
 export function notFountKeyUtil (argObject, key) {
-    let found = false;
-    
+    let found = false;  
     Object
         .keys(argObject)
         .forEach( (keyArg) => {
@@ -35,7 +34,6 @@ export function notFountKeyUtil (argObject, key) {
                 found=true;
             }
         });
-
     if (!found) {
         throw new Error(`Attribute not fount in payload: ${key}`);
     }

@@ -1,5 +1,7 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
+import RNPrint from 'react-native-print';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import {useNavigation} from '@react-navigation/core';
 
 //Components
@@ -7,49 +9,39 @@ import BlackArea from '../../components/BlackArea';
 import Button from '../../components/Button';
 import ButtonBack from '../../components/ButtonBack';
 import Navbar from '../../components/Navbar';
-import Page from '../../components/Page';
+import Screen from '../../components/Screen';
 
 //Hooks
 import useApp from '../../hooks/useApp';
 
 //Controller
 import {deleteProduct} from '../../controllers/product.controller';
+import {getLogo} from '../../controllers/logo.controller';
 
 //Utils
 import FormateDateUtil from '../../util/FormateDate';
 import { ProductActionTypes } from '../../store/types';
+import GenerateProductsHTML from '../../util/GenerateProductsHTML';
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 22,
-  },
-  group: {
-    marginVertical: 8,
-  },
-  labelGroup: {
-    color: '#5C5C5C',
-    fontSize: 10,
-    fontWeight: '500',
-    marginBottom: 4,
-  },
-  textGroup: {
-    color: 'black',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  textPrice: {
-    color: 'green',
-    fontWeight: 'bold',
-  },
-});
+//styles
+import styles from './styles'
+import { defaultID } from '../../constants';
 
 const Group = ({label, text, isPrice}) => (
-  <View style={styles.group}>
-    <Text style={styles.labelGroup}>{label}</Text>
-    <Text style={[styles.textGroup, isPrice ? styles.textPrice : {}]}>
-      {text}
-    </Text>
-  </View>
+  <>
+    {
+      text ? (
+        <View style={styles.group}>
+          <Text style={styles.labelGroup}>{label}</Text>
+          <Text style={[styles.textGroup, isPrice ? styles.textPrice : {}]}>
+            {isPrice ? 'R$ ' : ''}{text}
+          </Text>
+        </View>
+      ) : (
+        <></>
+      )
+    }
+  </>
 );
 
 const BSpacing = ({children}) => (
@@ -57,8 +49,8 @@ const BSpacing = ({children}) => (
 );
 
 export default () => {
+  const formateDate = new FormateDateUtil();
   const { navigate, goBack } = useNavigation();
-  
   const {
     product,
     productDispatch,
@@ -69,8 +61,6 @@ export default () => {
     addLoader,
     removeLoader,
   } = useApp();
-
-  const formateDate = new FormateDateUtil();
 
   const onDelete = () => {
     productsDispatch({
@@ -93,12 +83,35 @@ export default () => {
       });
   };
 
+  const printHTML = async () => {
+    const logo = await getLogo(defaultID);
+
+    await RNPrint.print({
+      isLandscape: true,
+      html: GenerateProductsHTML({ product: product, amount: 36, price: '16.00', logoURI: logo.uri })
+    });
+  }
+
+  const printPDF = async () => {
+    const logo = await getLogo(defaultID);
+
+    const g = GenerateProductsHTML({ product: product, amount: 36, price: '16.00', logoURI: logo.uri });  
+
+    const results = await RNHTMLtoPDF.convert({
+      html: GenerateProductsHTML({ product: product, amount: 36, price: '16.00', logoURI: logo.uri }),
+      fileName: 'test',
+      base64: true,
+    })
+
+    await RNPrint.print({ filePath: results.filePath });
+  }
+
   React.useEffect( () => {
     return () => productDispatch({type: ProductActionTypes.RESET})
   }, [productDispatch])
 
   return (
-    <Page>
+    <Screen>
       <Navbar left={<ButtonBack />} />
 
       <BlackArea title="Informações do produto" style={{flex: 1}}>
@@ -108,7 +121,7 @@ export default () => {
             <Group label="Código de barras" text={product?.barcode} />
             <Group label="Descrição" text={product?.description} />
             <Group label="Categoria" text={product?.category} />
-            <Group label="Preço" isPrice text={`R$ ${product?.price}`} />
+            <Group label="Preço" isPrice text={product?.price} />
             <Group
               label="Criação"
               text={formateDate.toUsualDate(product?.created_at)}
@@ -140,9 +153,9 @@ export default () => {
         </BSpacing>
 
         <BSpacing>
-          <Button iconName="print" text="Imprimir este produto" />
+          <Button iconName="print" onPress={ printHTML } text="Imprimir este produto" />
         </BSpacing>
       </BlackArea>
-    </Page>
+    </Screen>
   );
 };

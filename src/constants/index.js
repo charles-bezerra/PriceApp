@@ -41,3 +41,5 @@ export const initialPagination = {
     minIndex: 0,
     maxIndex: 9,
 };
+
+export const defaultID = "xxx1";

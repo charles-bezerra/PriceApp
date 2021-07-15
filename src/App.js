@@ -8,14 +8,14 @@
 
 import React from 'react';
 import Routes from './routes';
-import { AppProvider } from './contexts';
+import { AppProvider } from './contexts/app';
 
 const App = () => {
-    return (
-        <AppProvider>
-            <Routes/>
-        </AppProvider>
-    );
+  return (
+    <AppProvider>
+      <Routes />
+    </AppProvider>
+  );
 }
 
 export default App;

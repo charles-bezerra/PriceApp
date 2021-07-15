@@ -1,9 +1,11 @@
 import Realm from 'realm';
+
+import LogoSchema from '../schemas/Logo';
 import ProductSchema from '../schemas/Product';
 
-const getRealm = async () => Realm.open({
+export const getRealm = async () => {
+  return Realm.open({
     path: 'precoImpressoAppStorage',
-    schema: [ProductSchema],
-});
-
-export default getRealm;
+    schema: [ProductSchema, LogoSchema],
+  });
+};
