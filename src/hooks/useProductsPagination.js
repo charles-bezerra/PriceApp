@@ -15,6 +15,7 @@ import { PaginationActionTypes, ProductsActionTypes } from "../store/types";
 
 const useProductsPagination = () => {
   const [products, productsDispatch] = React.useReducer(productsReducer, []);
+  
   const [pagination, paginationDispatch] = React.useReducer(
     paginationReducer,
     initialPagination

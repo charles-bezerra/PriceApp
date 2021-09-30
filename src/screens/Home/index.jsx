@@ -45,7 +45,7 @@ export default () => {
         <Row style={{ justifyContent: 'space-between' }}>
           <Col width="50%" style={{ paddingEnd: 4 }}>
             <View style={styles.contentTitle}>
-              <Text style={styles.title}>Bem Vindo</Text>
+              <Text style={styles.title}>Bem-vindo ao</Text>
               <Text style={styles.subTitle}>Preço Impresso</Text>
             </View>
           </Col>

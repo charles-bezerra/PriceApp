@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import stylesGlobal from '../../assets/styles';
 
 const styles = StyleSheet.create({
     title: {
-        color: 'black',
+        color: '#4F4F4F',
         fontSize: 18,
         fontWeight: '400',
         marginBottom: 16,
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         paddingTop: 16,
         paddingBottom: 16,
+        ...stylesGlobal.shadow
     },
 });
 

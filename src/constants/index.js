@@ -31,7 +31,7 @@ export const initialProduct = {
     title: "",
     description: "",
     barcode: "",
-    price: "",
+    price: "0.00",
     category: "",
     created_at: "",
     updated_at: "",

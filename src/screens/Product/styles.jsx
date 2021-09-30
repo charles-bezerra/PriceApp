@@ -4,24 +4,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
   },
-  group: {
-    marginVertical: 8,
+  titleModal: {
+    overflow: "hidden",
+    fontSize:24,
+    fontWeight:'bold',
   },
-  labelGroup: {
-    color: '#5C5C5C',
-    fontSize: 10,
-    fontWeight: '500',
-    marginBottom: 4,
-  },
-  textGroup: {
-    color: 'black',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  textPrice: {
-    color: 'green',
-    fontWeight: 'bold',
-  },
+  subtitleModal: {
+    fontSize: 18,
+    fontWeight: "normal"
+  }
 });
 
 export default styles;

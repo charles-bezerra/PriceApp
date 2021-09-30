@@ -1,13 +1,16 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 
-import Screen from '../../components/Screen';
-import ImagePicker from '../../components/ImagePicker';
-import Col from '../../components/Col';
 import BlackArea from '../../components/BlackArea';
+import ButtonBack from '../../components/ButtonBack';
+import Col from '../../components/Col';
+import Navbar from '../../components/Navbar';
+import Screen from '../../components/Screen';
 import VSpacing from '../../components/VSpacing';
+import ImagePicker from '../../components/ImagePicker';
 
 import { getLogo } from '../../controllers/logo.controller';
+
 import { defaultID } from '../../constants';
 
 import styles from './styles';
@@ -43,8 +46,11 @@ export default () => {
 
   return (
     <Screen>
+      <Navbar left={<ButtonBack/>}/>
+      
       <VSpacing/>
-      <BlackArea title="Carregar logo para impressão" style={{ flex: .8 }}>
+
+      <BlackArea title="Carregar logo para impressão" style={{ flex: 1 }}>
         <Col style={{ flex: 1 }}>
           <Col style={{ flex: 1, justifyContent: 'center' }}>
             {

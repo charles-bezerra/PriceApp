@@ -3,10 +3,19 @@ import React from "react";
 //components
 import Input from "../Input";
 import SelectInput from "../SelectInput";
+
+//constants
 import { categories } from "../../constants";
 
+//hooks
+import useFormater from "../../hooks/useFormater";
+
 export default ({ product, productDispatch }) => {
+  const { priceFormater } = useFormater();
+
   const onChange = (fieldName, value) => {
+    if (fieldName === 'price') 
+      value = priceFormater(value);
     productDispatch({
       type: "CHANGE",
       payload: { fieldName, value },
