@@ -105,6 +105,11 @@ export default () => {
   const printHTML = async () => {
     const logo = await getLogo(defaultID);
 
+    if (logo === null) {
+      Alert.alert("Logo não encontrada, por favor faça upload de uma logo na tela inicial.");
+      return;
+    }
+
     await RNPrint.print({
       isLandscape: true,
       html: GenerateProductsHTML({ 

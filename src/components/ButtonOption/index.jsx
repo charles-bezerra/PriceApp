@@ -15,7 +15,7 @@ export default ({ onPress, iconName, title }) => {
             style={[styles.button]}>
 
             <Col style={{flex: 1, justifyContent: "space-between"}}>
-                <Icon name={iconName} size={20} color="#fff"/>
+                <Icon name={iconName} size={16} color="#fff"/>
 
                 <View style={styles.contentTitle}>
                     <Text style={styles.title}>{title}</Text>

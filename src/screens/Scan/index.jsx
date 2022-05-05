@@ -11,6 +11,7 @@ import styles from './styles';
 //hooks
 import useApp from '../../hooks/useApp';
 import { useNavigation } from '@react-navigation/native';
+import ButtonBack from '../../components/ButtonBack';
 
 export default () => {
   let camera = null;
@@ -26,6 +27,9 @@ export default () => {
 
   return (
     <View style={styles.container}>
+      <View style={{height: 50, padding: 8}}>
+        <ButtonBack />
+      </View>
       <RNCamera
         ref={(ref) => {
           camera = ref;

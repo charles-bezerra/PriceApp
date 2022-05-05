@@ -3,7 +3,6 @@ import React from 'react';
 //Components
 import BlackArea from '../../components/BlackArea';
 import ButtonBack from '../../components/ButtonBack';
-import Button from '../../components/Button';
 import Navbar from '../../components/Navbar';
 import Screen from '../../components/Screen';
 import ListProducts from '../../components/ListProducts';
@@ -24,7 +23,7 @@ export default () => {
   
   return (
     <Screen>
-      <Navbar left={<ButtonBack />} right={<Button text="Filtrar" />} />
+      <Navbar left={<ButtonBack />} right={<></>} />
       <BlackArea title="Lista de produtos" style={{flex: 1}}>
         <ListProducts 
           products={products} 

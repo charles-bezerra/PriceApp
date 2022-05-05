@@ -48,5 +48,10 @@
   },
   "android": {
     "package": "com.startupautomatic.impresso"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }

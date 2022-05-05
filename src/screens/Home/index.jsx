@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {Text, View} from 'react-native';
 
 //Components
 import BlackArea from '../../components/BlackArea';
@@ -13,25 +13,27 @@ import ListProductSimple from '../../components/ListProductSimple';
 import VSpacing from '../../components/VSpacing';
 
 //Hooks
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import useApp from '../../hooks/useApp';
 
 //Controller
-import { listProduct } from '../../controllers/product.controller';
+import {listProduct} from '../../controllers/product.controller';
 
 //StyleSheets
 import styles from './styles';
 
 export default () => {
-  const { navigate } = useNavigation();
-  const { products, productsDispatch } = useApp();
+  const {navigate} = useNavigation();
+  const {products, productsDispatch} = useApp();
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      listProduct(0, 9)
-        .then((productsResponse) => {
-          productsDispatch({ type: 'SET', payload: { products: [...productsResponse] } });
+      listProduct(0, 9).then((productsResponse) => {
+        productsDispatch({
+          type: 'SET',
+          payload: {products: [...productsResponse]},
         });
+      });
     }, 2000);
 
     return () => clearInterval(interval);
@@ -39,25 +41,22 @@ export default () => {
 
   return (
     <Screen>
-      <VSpacing />
-
       <VSpacing>
-        <Row style={{ justifyContent: 'space-between' }}>
-          <Col width="50%" style={{ paddingEnd: 4 }}>
-            <View style={styles.contentTitle}>
-              <Text style={styles.title}>Bem-vindo ao</Text>
-              <Text style={styles.subTitle}>Preço Impresso</Text>
-            </View>
-          </Col>
-
-          <Col width="50%" style={{ paddingStart: 4 }}>
-            <CounterArea title="Total de produtos" />
-          </Col>
+        <Row style={{justifyContent: 'space-between'}}>
+          <View style={styles.contentTitle}>
+            <Text style={styles.title}>Bem-vindo ao</Text>
+            <Text style={styles.subTitle}>Preço Impresso</Text>
+          </View>
+        </Row>
+      </VSpacing>
+      <VSpacing>
+        <Row style={{width: '100%'}}>
+          <CounterArea style={{width: '100%'}} title="Total de produtos" />
         </Row>
       </VSpacing>
 
-      <VSpacing style={{ flex: 1 }}>
-        <BlackArea title="Últimos produtos adicionados" style={{ flex: 1 }}>
+      <VSpacing style={{flex: 1}}>
+        <BlackArea title="Últimos produtos adicionados" style={{flex: 1}}>
           <ListProductSimple products={products} />
         </BlackArea>
       </VSpacing>
@@ -78,14 +77,8 @@ export default () => {
           iconName="upload"
           onPress={() => navigate('UPLOAD_IMAGE')}
         />
-        <ButtonOption
-          title="Backup"
-          iconName="undo"
-        />
-        <ButtonOption
-          title="Ajuda"
-          iconName="info-circle"
-        />
+        <ButtonOption title="Backup" iconName="undo" />
+        <ButtonOption title="Ajuda" iconName="info-circle" />
       </SliderArea>
     </Screen>
   );

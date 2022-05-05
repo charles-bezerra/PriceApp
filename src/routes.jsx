@@ -18,15 +18,15 @@ const StackApp = createStackNavigator();
 
 export default () => (
   <NavigationContainer>
-    <StackApp.Navigator>
-      <StackApp.Screen options={{ headerShown: false }} name="HOME" component={HomeScreen} />
-      <StackApp.Screen options={{ headerShown: false }} name="PRODUCT" component={ProductScreen} />
-      <StackApp.Screen options={{ headerShown: false }} name="PRODUCTS" component={ProductsScreen} />
-      <StackApp.Screen options={{ headerShown: false }} name="REGISTER" component={RegisterScreen} />
-      <StackApp.Screen options={{ headerShown: false }} name="CAM_SCAN" component={ScanScreen} />
-      <StackApp.Screen options={{ headerShown: false }} name="PRODUCT_EDIT" component={ProductEditScreen} />
-      <StackApp.Screen options={{ headerShown: false }} name="SWITCH" component={SwitchScreen} />
-      <StackApp.Screen options={{ headerShown: false }} name="UPLOAD_IMAGE" component={UploadImageScreen} />
+    <StackApp.Navigator screenOptions={{headerShown: false}}>
+      <StackApp.Screen name="HOME" component={HomeScreen} options={{animation: 'fade'}} />
+      <StackApp.Screen name="PRODUCT" component={ProductScreen} options={{animation: 'fade'}} />
+      <StackApp.Screen name="PRODUCTS" component={ProductsScreen} options={{animation: 'slide_from_bottom'}} />
+      <StackApp.Screen name="CAM_SCAN" component={ScanScreen} options={{animation: 'slide_from_bottom'}} />
+      <StackApp.Screen name="PRODUCT_EDIT" component={ProductEditScreen} options={{animation: 'fade'}} />
+      <StackApp.Screen name="SWITCH" component={SwitchScreen} options={{animation: 'slide_from_bottom'}} />
+      <StackApp.Screen name="UPLOAD_IMAGE" component={UploadImageScreen} options={{animation: 'slide_from_bottom'}} />
+      <StackApp.Screen name="REGISTER" component={RegisterScreen} options={{animation: 'slide_from_bottom'}} />
     </StackApp.Navigator>
   </NavigationContainer>
 )
